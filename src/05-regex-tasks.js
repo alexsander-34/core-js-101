@@ -1,3 +1,4 @@
+/* eslint-disable linebreak-style */
 /* *******************************************************************************************
  *                                                                                           *
  * Plese read the following tutorial before implementing tasks:                              *
@@ -32,7 +33,7 @@
  * @return {RegExp}
  */
 function getRegexForGuid() {
-  return new RegExp(/{[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9][^A-Z][a-fA-F0-9]{2}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}}/);
+  return /{[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}}/;
 }
 
 
@@ -54,7 +55,7 @@ function getRegexForGuid() {
  *
  */
 function getRegexForPitSpot() {
-  return new RegExp(/p.t/);
+  return /s.+|.+i.+/;
 }
 
 
@@ -79,7 +80,8 @@ function getRegexForPitSpot() {
  *   'Pa55'.match(validator) => false
  */
 function getPasswordValidator(minLength) {
-  return new RegExp(`(?!.* )(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{${minLength},}`);
+  const newRegex = new RegExp(`(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])[a-zA-Z0-9]{${minLength},}$`);
+  return newRegex;
 }
 
 
@@ -88,3 +90,5 @@ module.exports = {
   getRegexForPitSpot,
   getPasswordValidator,
 };
+
+
