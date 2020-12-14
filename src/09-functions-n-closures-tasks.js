@@ -24,7 +24,7 @@
  *
  */
 function getComposition(f, g) {
-  return function a(x) {
+  return function func(x) {
     return f(g(x));
   };
 }
@@ -47,7 +47,7 @@ function getComposition(f, g) {
  *
  */
 function getPowerFunction(exponent) {
-  return function a(x) {
+  return function pow(x) {
     return x ** exponent;
   };
 }
@@ -67,7 +67,25 @@ function getPowerFunction(exponent) {
  *   getPolynom()      => null
  */
 function getPolynom(...args) {
-  return (x) => args.reduce((acc, el, i, arr) => acc + el * x ** (arr.length - 1 - i), 0) || null;
+  if (args.length === 0) {
+    return null;
+  }
+  switch (args.length) {
+    case 3:
+      return function func(x) {
+        return args[0] * x ** 2 + args[1] * x + args[2];
+      };
+
+    case 2:
+      return function func(x) {
+        return args[0] * x + args[1];
+      };
+
+    default:
+      return function func() {
+        return args[0];
+      };
+  }
 }
 
 
@@ -85,12 +103,8 @@ function getPolynom(...args) {
  *   ...
  *   memoizer() => the same random number  (next run, returns the previous cached result)
  */
-function memoize(func) {
-  let res;
-  return function a() {
-    if (res === undefined) res = func();
-    return res;
-  };
+function memoize(/* func */) {
+  throw new Error('Not implemented');
 }
 
 
@@ -156,9 +170,8 @@ function logger(/* func, logFunc */) {
  *   partialUsingArguments(fn, 'a','b','c','d')() => 'abcd'
  */
 function partialUsingArguments(fn, ...args1) {
-  return function a(...args2) {
-    const arr = [...args1, ...args2];
-    return fn(...arr);
+  return function func(...args2) {
+    return fn.call(this, ...args1, ...args2);
   };
 }
 
@@ -182,7 +195,7 @@ function partialUsingArguments(fn, ...args1) {
  */
 function getIdGeneratorFunction(startFrom) {
   let id = startFrom - 1;
-  return function a() {
+  return function func() {
     id += 1;
     return id;
   };
