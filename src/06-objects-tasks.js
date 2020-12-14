@@ -1,3 +1,4 @@
+/* eslint-disable linebreak-style */
 /* ************************************************************************************************
  *                                                                                                *
  * Plese read the following tutorial before implementing tasks:                                   *
@@ -20,14 +21,12 @@
  *    console.log(r.height);      // => 20
  *    console.log(r.getArea());   // => 200
  */
-function Rectangle(width, height) {
-  return {
-    width,
-    height,
-    getArea() {
-      return this.width * this.height;
-    },
+function Rectangle(wid, heig) {
+  const rectangle = {
+    width: wid,
+    height: heig,
   };
+  return rectangle;
 }
 
 
@@ -58,9 +57,9 @@ function getJSON(obj) {
  *
  */
 function fromJSON(proto, json) {
-  const obj = JSON.parse(json);
-  Object.setPrototypeOf(obj, proto);
-  return obj;
+  const jsonVal = JSON.parse(json);
+  const values = Object.values(jsonVal);
+  return new proto.constructor(...values);
 }
 
 
@@ -155,4 +154,3 @@ module.exports = {
   fromJSON,
   cssSelectorBuilder,
 };
-
